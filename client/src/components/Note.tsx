@@ -18,7 +18,7 @@ const Note = ({ note, className }: NoteProps) => {
   }
 
   return (
-    <Card className={`${styles.noteCard} ${className}`}>
+    <Card className={`${className} ${styles.noteCard} `}>
       <Card.Body className={styles.cardBody}>
         <Card.Title>{title}</Card.Title>
         <Card.Text className={styles.cardText}>{text}</Card.Text>
