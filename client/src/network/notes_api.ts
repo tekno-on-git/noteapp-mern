@@ -1,4 +1,5 @@
 import { Note } from '../models/note';
+// import { NoteInput } from '';
 
 async function fetchData(input: RequestInfo, init?: RequestInit) {
   const resp = await fetch(input, init);
@@ -29,5 +30,21 @@ export async function createNote(note: NoteInput): Promise<Note> {
     },
     body: JSON.stringify(note),
   });
+  return resp.json();
+}
+
+export async function deleteNote(noteId: string) {
+  await fetchData(`/api/notes/${noteId}`, { method: 'DELETE' });
+}
+
+export async function updateNote(noteId: string, note: NoteInput) {
+  const resp = await fetchData(`/api/notes/${noteId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(note),
+  });
+
   return resp.json();
 }
