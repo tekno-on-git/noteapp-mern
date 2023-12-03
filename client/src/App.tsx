@@ -1,7 +1,3 @@
-import { Container } from 'react-bootstrap';
-import styles from './styles/NotesPage.module.css';
-import NotePageLoggedInView from './components/NotePageLoggedInView';
-import NotePageLoggedOutView from './components/NotePageLoggedOutView';
 import SignUpModal from './components/SignUpModal';
 import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
@@ -9,6 +5,13 @@ import { useEffect, useState } from 'react';
 import { User } from './models/user';
 
 import * as NotesApi from './network/notes_api';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import NotesPage from './pages/NotesPage';
+import PrivacyPage from './pages/PrivacyPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+import styles from './styles/App.module.css';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
@@ -30,15 +33,23 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <NavBar
-        loggedUser={loggedUser}
-        onLoginClicked={() => setShowLoginModal(true)}
-        onSignUpClicked={() => setShowSignUpModal(true)}
-        onLogoutSuccess={() => setLoggedUser(null)}
-      />
-      <Container className={styles.NotesPage}>
-        <>{loggedUser ? <NotePageLoggedInView /> : <NotePageLoggedOutView />}</>
+    <BrowserRouter>
+      <div>
+        <NavBar
+          loggedUser={loggedUser}
+          onLoginClicked={() => setShowLoginModal(true)}
+          onSignUpClicked={() => setShowSignUpModal(true)}
+          onLogoutSuccess={() => setLoggedUser(null)}
+        />
+
+        <Container className={styles.pageContainer}>
+          <Routes>
+            <Route path="/" element={<NotesPage loggedUser={loggedUser} />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/*" element={<NotFoundPage />} />
+          </Routes>
+        </Container>
+
         {showSignUpModal && (
           <SignUpModal
             onDismiss={() => setShowSignUpModal(false)}
@@ -57,8 +68,8 @@ function App() {
             }}
           />
         )}
-      </Container>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
