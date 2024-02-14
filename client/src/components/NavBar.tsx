@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import NavBarLogged from './NavBarLogged';
 import NavBarLogOut from './NavBarLogOut';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
 interface NavBarProps {
   loggedUser: User | null;
@@ -22,7 +23,7 @@ const NavBar = ({
       <Container>
         <Navbar.Brand as={Link} to="/">
           <b>
-            <i>codep</i>
+            <i>kxzaz</i>
           </b>
           's Notes
         </Navbar.Brand>
