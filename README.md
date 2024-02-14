@@ -2,7 +2,7 @@
 
 Make notes and do CRUD operations with them.
 
-https://github.com/codeph-0bia/noteapp-mern/assets/63444697/5550d9d8-3c28-4225-9e06-17e837e77583
+https://github.com/kxzazz/noteapp-mern/assets/63444697/6c765ae0-8db6-4cff-b75d-3ab22c017c76
 
 ###### Made with:
 
